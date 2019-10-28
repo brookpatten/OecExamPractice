@@ -1,3 +1,7 @@
+The "question parser" executable was built to import questions in these word documents into json for use in the app
+
 http://www.togskipatrol.org/chapter_review_tests_with__answe.htm
 
 https://www.huffhillsskipatrol.org/oec-class-materials.html
+
+I'm not sure what the source of this format is, but I'm guessing the now-defunct "mynspkit" website that came with the book initially
