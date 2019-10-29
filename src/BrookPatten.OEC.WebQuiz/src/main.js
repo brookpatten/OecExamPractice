@@ -23,7 +23,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueLodash, lodash)
 
 if (process.env.NODE_ENV === 'production') {
-  Axios.defaults.baseURL = '.'
+  Axios.defaults.baseURL = ''
 } else {
   Axios.defaults.baseURL = ''
 }
