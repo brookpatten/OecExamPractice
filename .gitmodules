@@ -1,4 +1,0 @@
-[submodule "src/BrookPatten.OEC.WebQuiz/dist"]
-	path = src/BrookPatten.OEC.WebQuiz/dist
-	url = git@github.com:brookpatten/OEC5thEditionTest.git
-	branch = gh-pages
