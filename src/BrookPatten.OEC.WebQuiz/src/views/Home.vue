@@ -36,6 +36,7 @@
               <b-col sm="6" lg="4">
                 Other Stuff
                 <ul>
+                  <li><a href="http://www.nspcentral.org/docs/oec/2017OEC5eChapObjpgnum.pdf">Chapter Objectives with Page Numbers</a></li>
                   <li><a href="https://joinskipatrol.wordpress.com/2011/10/12/exam-debreif-so-what-was-actually-on-the-oec-5e-test/">OEC Test Debrief</a></li>
                   <li><a href="https://www.snynsp.org/forms/senior/Ski%20Patroller%20Manual%20-%20App%20G%20Senior%20OEC%20Exercises.pdf">Practice Scenarios</a></li>
                 </ul>
