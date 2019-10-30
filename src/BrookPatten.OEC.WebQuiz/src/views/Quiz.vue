@@ -140,10 +140,12 @@ export default {
 
             for(var i=0;i<questionCount;i++){
                 var question = this.findRandomUnusedQuestion(this.currentQuiz,chapter.Questions)
-                for(var x=0;x<question.Answers.length;x++){
-                    question.Answers[x].FormattedText = question.Answers[x].Letter + '. '+question.Answers[x].Text
+                if(question){
+                    for(var x=0;x<question.Answers.length;x++){
+                        question.Answers[x].FormattedText = question.Answers[x].Letter + '. '+question.Answers[x].Text
+                    }
+                    this.currentQuiz.push(question)
                 }
-                this.currentQuiz.push(question)
             }
             this.loadingCounter--
           }
@@ -151,6 +153,10 @@ export default {
       },
       findRandomUnusedQuestion(usedQuestions,allQuestions){
           var unused = this._.without(allQuestions,usedQuestions)
+
+          var _ = this._
+
+          var unused = this._.filter(allQuestions,function(q) { return _.indexOf(usedQuestions,q) == -1 })
 
           var randomIndex = Math.floor(Math.random() * unused.length);
 
