@@ -132,7 +132,7 @@ export default {
             this.showResults = false
             var chapterNumber = this.selectedChapter
             this.loadingMessage = "Creating Random Quiz..."
-            this.loadingMessage++
+            this.loadingCounter++
             this.currentQuiz = []
             var chapter = this._.find(this.questionBank.Chapters,{Number:chapterNumber})
 
@@ -145,6 +145,7 @@ export default {
                 }
                 this.currentQuiz.push(question)
             }
+            this.loadingCounter--
           }
           
       },

@@ -125,7 +125,7 @@ export default {
       generate: function(){
         this.showResults = false
         this.loadingMessage = "Creating Random Exam..."
-        this.loadingMessage++
+        this.loadingCounter++
         this.currentQuiz = []
         
         var questionCount=100;
@@ -139,6 +139,8 @@ export default {
             this.currentQuiz.push(question)
         }
         this.currentQuiz = this._.sortBy(this.currentQuiz,['ChapterNumber','Objective'])
+
+        this.loadingCounter--
       },
       findRandomUnusedQuestion(usedQuestions,allQuestions){
           var unused = this._.without(allQuestions,usedQuestions)
