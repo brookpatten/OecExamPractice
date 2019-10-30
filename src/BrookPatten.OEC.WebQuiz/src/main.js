@@ -12,6 +12,7 @@ import router from './router'
 import Axios from 'axios'
 import lodash from 'lodash'
 import VueLodash from 'vue-lodash'
+import VueBlockUI from 'vue-blockui'
 
 import Es6Promise from 'es6-promise'
 Es6Promise.polyfill()
@@ -21,11 +22,12 @@ Es6Promise.polyfill()
 
 Vue.use(BootstrapVue)
 Vue.use(VueLodash, lodash)
+Vue.use(VueBlockUI)
 
 if (process.env.NODE_ENV === 'production') {
-  Axios.defaults.baseURL = ''
+  Axios.defaults.baseURL = './'
 } else {
-  Axios.defaults.baseURL = ''
+  Axios.defaults.baseURL = './'
 }
 
 // debated adding axios at $http, but that could be confusing if another

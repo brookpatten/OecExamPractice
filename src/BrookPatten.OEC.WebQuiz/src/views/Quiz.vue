@@ -1,13 +1,76 @@
 <template>
   <div class="animated fadeIn">
       <b-row>
-        <b-col sm="6" lg="3">
-            <b-card no-body class="bg-primary">
-            <b-card-body class="pb-0">
-            </b-card-body>
+          <b-col sm="6" lg="12">
+            <b-card>
+                <b-row>
+                    <b-col sm="2" lg="4">
+                        Select Chapter: <b-form-select v-model="selectedChapter" v-on:change="generate()" :options="questionBank.Chapters" value-field="Number" text-field="Number"></b-form-select>
+                    </b-col>
+                    <b-col sm="1" lg="1">
+                        <b-button variant="success" v-on:click="generate()">Randomize</b-button> 
+                    </b-col>
+                    <b-col sm="1" lg="1">
+                        <b-button variant="warning" v-on:click="gradeIt()">Results</b-button>
+                    </b-col>
+                </b-row>
             </b-card>
+          </b-col>
+      </b-row>
+      <b-row v-if="showResults">
+          <b-col sm="6" lg="12">
+              <b-card>
+                    <b-row>
+                        <b-col sm="6" lg="12">
+                            <h1><b-badge :variant="passingScore ? 'success' : 'danger'">{{correctQuestionsCount}} / {{currentQuiz.length}}</b-badge></h1>
+                        </b-col>
+                    </b-row>
+              </b-card>
+          </b-col>
+      </b-row>
+      <b-row>
+        <b-col sm="6" lg="12">
+            <b-form-group v-for="(question,qindex) in currentQuiz" :key="qindex"
+                        :label-for="'question_'+qindex"
+                        >
+                <b-card :border-variant="!showResults || question.UserAnswerLetter == null ||  question.UserAnswerLetter == '' ? 'dark' : (question.UserAnswerLetter == question.CorrectAnswerLetter ? 'success' : 'danger')">
+                    <b-row>
+                        <b-col sm="6" lg="12">
+                            {{qindex+1}}. {{question.Text}}
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col sm="6" lg="12">
+                            <b-radio-group stacked :name="'question_'+qindex" :options="question.Answers" v-model="question.UserAnswerLetter" value-field="Letter" text-field="FormattedText"></b-radio-group>
+                        </b-col>
+                    </b-row>
+                    <b-row v-if="showResults && question.UserAnswerLetter!=question.CorrectAnswerLetter">
+                        <b-col sm="6" lg="12">
+                            Answer: {{question.CorrectAnswerLetter}}
+                        </b-col>
+                    </b-row>
+                    <b-row v-if="showResults">
+                        <b-col sm="6" lg="12">
+                            Chapter: {{question.ChapterNumber}}
+                        </b-col>
+                    </b-row>
+                    <b-row v-if="showResults">
+                        <b-col sm="6" lg="12">
+                            Objective: {{question.Objective}}
+                        </b-col>
+                    </b-row>
+                    <b-row v-if="showResults">
+                        <b-col sm="6" lg="12">
+                            Reference Page: {{question.Reference}}
+                        </b-col>
+                    </b-row>
+                </b-card>
+            </b-form-group>
         </b-col>
       </b-row>
+      <BlockUI v-if="loadingCounter != 0" :message="loadingMessage">
+        <i class='fa fa-cog fa-spin fa-3x fa-fw'></i>
+      </BlockUI>
   </div>
 </template>
 <script>
@@ -21,26 +84,40 @@ export default {
   props: {
 
   },
+  computed: {
+      correctQuestionsCount: function(){
+          return this._.filter(this.currentQuiz,function(q){ return q.UserAnswerLetter == q.CorrectAnswerLetter }).length
+      },
+      passingScore: function(){
+          return this.correctQuestionsCount > (this.currentQuiz.length * .8)
+      }
+  },
   data: function() {
       return {
+          showResults: false,
+          currentQuiz:[],
+          selectedChapter: 1,
+          loadingCounter: 0,
+          loadingMessage: '',
           questionBank:{
-              chapters:[
+              Chapters:[
                   {
-                      number: 1,
-                      questions: [
+                      Number: 1,
+                      Questions: [
                           {
-                              number: 1,
-                              chapterNumber: 1,
-                              text: '?',
-                              answers: [
+                              Number: 1,
+                              ChapterNumber: 1,
+                              Text: '?',
+                              Answers: [
                                   {
-                                      letter: 'a',
-                                      text:''
+                                      Letter: 'a',
+                                      Text:''
                                   }
                               ],
-                              correctAnswerLetter: 'a',
-                              objective: '',
-                              reference: ''
+                              CorrectAnswerLetter: 'a',
+                              UserAnswerLetter: '',
+                              Objective: '',
+                              Reference: ''
                           }
                       ]
                   }
@@ -50,19 +127,51 @@ export default {
   },
   methods: {
       generate: function(){
+          
+          if(this.selectedChapter>0){
+            this.showResults = false
+            var chapterNumber = this.selectedChapter
+            this.loadingMessage = "Creating Random Quiz..."
+            this.loadingMessage++
+            this.currentQuiz = []
+            var chapter = this._.find(this.questionBank.Chapters,{Number:chapterNumber})
 
+            var questionCount=20;
+
+            for(var i=0;i<questionCount;i++){
+                var question = this.findRandomUnusedQuestion(this.currentQuiz,chapter.Questions)
+                for(var x=0;x<question.Answers.length;x++){
+                    question.Answers[x].FormattedText = question.Answers[x].Letter + '. '+question.Answers[x].Text
+                }
+                this.currentQuiz.push(question)
+            }
+          }
+          
+      },
+      findRandomUnusedQuestion(usedQuestions,allQuestions){
+          var unused = this._.without(allQuestions,usedQuestions)
+
+          var randomIndex = Math.floor(Math.random() * unused.length);
+
+          return unused[randomIndex]
       },
       fetch: function(){
+          this.loadingMessage = 'Downloading Questions...'
+          this.loadingCounter++
           this.$axios.get('question-bank.json')
           .then(response => {
             this.questionBank = response.data
-            //this.loadingCounter--
+            this.loadingCounter--
             console.info("loaded questions ok")
+            this.generate()
           }).catch(response => {
             // error
             console.error(response)
-            //this.loadingCounter--
+            this.loadingCounter--
           })
+      },
+      gradeIt: function() {
+          this.showResults = true
       }
   },
   beforeMount () {

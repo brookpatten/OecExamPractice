@@ -2,12 +2,11 @@
       <TheFooter>
         <div>
           <!--footer-->
-          <a href="http://nsp.org">NSP OEC 5th Edition</a>
+          <a href="http://brookp.me">This garbage App by Brook Patten</a>
           <!--<span class="ml-1">&copy; 2018 creativeLabs.</span>-->
         </div>
         <div class="ml-auto">
-          <!--<span class="mr-1">Powered by</span>
-          <a href="https://coreui.io">CoreUI for Vue</a>-->
+          <a href="http://nsp.org" pull-right>Questions & Answers property of NSP</a>
         </div>
       </TheFooter>
 </template>

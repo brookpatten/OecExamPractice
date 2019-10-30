@@ -19,7 +19,7 @@ export default {
       }
     },
     {
-      name: 'Quiz Practice',
+      name: 'Chapter Quiz',
       url: '/quiz',
       icon: 'icon-list'
     },
