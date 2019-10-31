@@ -66,6 +66,7 @@
                     </b-row>
                 </b-card>
             </b-form-group>
+            <b-button v-on:click="scrollToTop()" variant="primary">Back to the Top</b-button>
         </b-col>
       </b-row>
       <BlockUI v-if="loadingCounter != 0" :message="loadingMessage">
@@ -126,6 +127,10 @@ export default {
       }
   },
   methods: {
+      scrollToTop: function (){
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      },
       generate: function(){
           
           if(this.selectedChapter>0){

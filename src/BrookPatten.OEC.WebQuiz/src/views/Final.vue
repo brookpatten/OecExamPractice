@@ -22,6 +22,22 @@
                             <h1><b-badge :variant="passingScore ? 'success' : 'danger'">{{correctQuestionsCount}} / {{currentQuiz.length}}</b-badge></h1>
                         </b-col>
                     </b-row>
+                    <b-row v-if="correctQuestionsCount<currentQuiz.length">
+                        <b-col sm="6" lg="12">
+                            <h2>What should you study?</h2>
+                        </b-col>
+                    </b-row>
+                    <b-row v-if="correctQuestionsCount<currentQuiz.length">
+                        <b-col sm="6" lg="12">
+                            <ul>
+                                <li v-for="(si,sindex) in studyItems" :key="sindex">Chapter {{si.ChapterNumber}} ({{si.count}} Incorrect)
+                                    <ul>
+                                        <li v-for="(oi,oindex) in si.Objectives" :key="oindex">Objective {{oi}}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </b-col>
+                    </b-row>
               </b-card>
           </b-col>
       </b-row>
@@ -63,6 +79,7 @@
                     </b-row>
                 </b-card>
             </b-form-group>
+            <b-button v-on:click="scrollToTop()" variant="primary">Back to the Top</b-button>
         </b-col>
       </b-row>
       <BlockUI v-if="loadingCounter != 0" :message="loadingMessage">
@@ -87,6 +104,27 @@ export default {
       },
       passingScore: function(){
           return this.correctQuestionsCount > (this.currentQuiz.length * .8)
+      },
+      studyItems: function (){
+          var _ = this._
+
+          var wrong = _.filter(this.currentQuiz,function(q){ return q.UserAnswerLetter != q.CorrectAnswerLetter })
+
+          var chapters = _.groupBy(wrong,'ChapterNumber')
+
+          var items = [];
+
+          _.forEach(chapters,function(v,k){
+              var item = {};
+              item.count = v.length
+              item.ChapterNumber = k
+              item.Objectives = _.sortBy(_.uniq(_.map(v,'Objective')),function(o){return o})
+              items.push(item)
+          })
+
+          items = _.sortBy(items,function(c){ return 1000 - c.count})
+
+          return items;
       }
   },
   data: function() {
@@ -122,6 +160,10 @@ export default {
       }
   },
   methods: {
+      scrollToTop: function (){
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      },
       generate: function(){
         this.showResults = false
         this.loadingMessage = "Creating Random Exam..."
