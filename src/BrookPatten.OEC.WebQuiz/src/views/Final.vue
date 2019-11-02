@@ -134,6 +134,7 @@ export default {
           loadingCounter: 0,
           loadingMessage: '',
           questionBank:{
+              IsDefault: true,
               Chapters:[
                   {
                       Number: 1,
@@ -224,7 +225,9 @@ export default {
 
   },
   mounted () {
-      this.fetch()
+      if(this.questionBank.IsDefault){
+        this.fetch()
+      }
   }
 }
 </script>
