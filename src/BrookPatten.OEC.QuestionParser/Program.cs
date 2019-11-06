@@ -175,19 +175,24 @@ namespace BrookPatten.OEC.QuestionParser
                     }
 
                     paragraphIndex = FindNextNonWhitespaceParagraph(paragraphs, paragraphIndex);
-                    if(paragraphs[paragraphIndex].Text.StartsWith("Answer:"))
+                    if(paragraphs[paragraphIndex].Text.Trim().StartsWith("Answer:"))
                     {
-                        question.CorrectAnswerLetter = paragraphs[paragraphIndex].Text.Replace("Answer:", "").Trim();
+                        question.CorrectAnswerLetter = paragraphs[paragraphIndex].Text.Trim().Replace("Answer:", "").Trim();
                     }
                     paragraphIndex = FindNextNonWhitespaceParagraph(paragraphs, paragraphIndex);
-                    if (paragraphs[paragraphIndex].Text.StartsWith("Objective:"))
+                    if (paragraphs[paragraphIndex].Text.Trim().StartsWith("Objective:"))
                     {
-                        question.Objective = paragraphs[paragraphIndex].Text.Replace("Objective:", "").Trim();
+                        question.Objective = paragraphs[paragraphIndex].Text.Trim().Replace("Objective:", "").Trim();
                     }
                     paragraphIndex = FindNextNonWhitespaceParagraph(paragraphs, paragraphIndex);
-                    if (paragraphs[paragraphIndex].Text.StartsWith("Reference:"))
+                    if (paragraphs[paragraphIndex].Text.Trim().StartsWith("Reference:"))
                     {
-                        question.Reference = paragraphs[paragraphIndex].Text.Replace("Reference:", "").Trim();
+                        question.Reference = paragraphs[paragraphIndex].Text.Trim().Replace("Reference:", "").Trim();
+                    }
+
+                    if(string.IsNullOrWhiteSpace(question.CorrectAnswerLetter))
+                    {
+                        Console.WriteLine($"Question '{question.Text}' is missing a correct answer");
                     }
 
                     chapter.Questions.Add(question);
