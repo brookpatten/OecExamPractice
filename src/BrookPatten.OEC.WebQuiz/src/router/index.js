@@ -8,6 +8,7 @@ const DefaultContainer = () => import('@/containers/DefaultContainer')
 const Home = () => import('@/views/Home')
 const Final = () => import('@/views/Final')
 const Quiz = () => import('@/views/Quiz')
+const Acronyms = () => import('@/views/Acronyms')
 
 // Views - Pages
 const Page404 = () => import('@/views/pages/Page404')
@@ -32,6 +33,11 @@ function configRoutes() {
           path: 'final',
           name: 'Final',
           component: Final
+        },
+        {
+          path: 'acronyms',
+          name: 'Acronyms',
+          component: Acronyms
         },
         {
           path: '/home',

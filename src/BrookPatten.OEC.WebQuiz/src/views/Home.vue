@@ -1,13 +1,14 @@
 <template>
   <div class="animated fadeIn">
       <b-row>
-        <b-col sm="2" lg="4">
+        <b-col sm="6" lg="12">
           <b-card>
             <b-row>
               <b-col sm="6" lg="12">
                 <b-btn-group>
                   <b-button to="quiz" variant="success">Chapter Quiz</b-button>
                   <b-button to="final" variant="primary">Exam Practice</b-button>
+                  <b-button to="acronyms" variant="secondary">Acronyms / Mnemonics</b-button>
                 </b-btn-group>
               </b-col>
             </b-row>
