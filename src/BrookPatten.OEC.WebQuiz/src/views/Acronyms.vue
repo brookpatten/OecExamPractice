@@ -19,11 +19,8 @@
                     </b-col>
                 </b-row>
                 <b-row v-for="(letter,lindex) in acronym.letters" :key="lindex">
-                    <b-col sm="3" lg="1">
-                        <em>{{letter.letter}}</em>
-                    </b-col>
-                    <b-col sm="3" lg="11">
-                        {{letter.text}}
+                    <b-col sm="6" lg="12">
+                        <em>{{letter.letter}}</em> {{letter.text}}
                     </b-col>
                 </b-row>
             </b-card>
