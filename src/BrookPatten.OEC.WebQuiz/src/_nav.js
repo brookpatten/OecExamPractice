@@ -31,7 +31,12 @@ export default {
     {
       name: 'Mnemonics',
       url: '/acronyms',
-      icon: 'icon-info'
+      icon: 'icon-options'
+    },
+    {
+      name: 'Lists & Scales',
+      url: '/lists',
+      icon: 'icon-list'
     }
   ]
 }

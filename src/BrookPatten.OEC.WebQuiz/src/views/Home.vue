@@ -9,6 +9,7 @@
                   <b-button to="quiz" variant="success">Chapter Quiz</b-button>
                   <b-button to="final" variant="primary">Exam Practice</b-button>
                   <b-button to="acronyms" variant="secondary">Acronyms / Mnemonics</b-button>
+                  <b-button to="lists" variant="dark">Lists / Scales</b-button>
                 </b-btn-group>
               </b-col>
             </b-row>

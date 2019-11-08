@@ -9,6 +9,7 @@ const Home = () => import('@/views/Home')
 const Final = () => import('@/views/Final')
 const Quiz = () => import('@/views/Quiz')
 const Acronyms = () => import('@/views/Acronyms')
+const Lists = () => import('@/views/Lists')
 
 // Views - Pages
 const Page404 = () => import('@/views/pages/Page404')
@@ -38,6 +39,11 @@ function configRoutes() {
           path: 'acronyms',
           name: 'Acronyms',
           component: Acronyms
+        },
+        {
+          path: 'lists',
+          name: 'Lists',
+          component: Lists
         },
         {
           path: '/home',
