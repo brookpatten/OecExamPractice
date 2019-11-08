@@ -70,7 +70,7 @@ export default {
                   ]
               },
               {
-                  acronym:'Sample',
+                  acronym:'SAMPLE',
                   pronounce:'',
                   purpose:'Secondary Assessment',
                   letters:[
