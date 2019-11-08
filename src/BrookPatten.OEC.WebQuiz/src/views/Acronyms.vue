@@ -4,7 +4,7 @@
           <b-col sm="6" lg="12">
             <b-card>
                 <b-row>
-                    <b-col sm="12" lg="12">
+                    <b-col sm="6" lg="12">
                         <h2>{{acronym.acronym}}</h2>
                     </b-col>
                 </b-row>
@@ -19,10 +19,10 @@
                     </b-col>
                 </b-row>
                 <b-row v-for="(letter,lindex) in acronym.letters" :key="lindex">
-                    <b-col sm="1" lg="1">
+                    <b-col sm="3" lg="1">
                         <em>{{letter.letter}}</em>
                     </b-col>
-                    <b-col sm="5" lg="11">
+                    <b-col sm="3" lg="11">
                         {{letter.text}}
                     </b-col>
                 </b-row>

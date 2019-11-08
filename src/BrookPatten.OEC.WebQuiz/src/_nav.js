@@ -27,6 +27,11 @@ export default {
       name: 'Exam Practice',
       url: '/final',
       icon: 'icon-layers'
+    },
+    {
+      name: 'Mnemonics',
+      url: '/acronyms',
+      icon: 'icon-info'
     }
   ]
 }
