@@ -7,11 +7,12 @@
                     <b-col sm="2" lg="4">
                         Select Chapter: <b-form-select v-model="selectedChapter" v-on:change="generate()" :options="questionBank.Chapters" value-field="Number" text-field="Number"></b-form-select>
                     </b-col>
-                    <b-col sm="1" lg="1">
+                    <b-col sm="4" lg="8">
+                        <b-button-group>
                         <b-button variant="success" v-on:click="generate()">Randomize</b-button> 
-                    </b-col>
-                    <b-col sm="1" lg="1">
-                        <b-button variant="warning" v-on:click="gradeIt()">Results</b-button>
+                        <b-button variant="warning" v-on:click="gradeIt()">Show Results</b-button>
+                        <b-button variant="danger" v-on:click="clear()">Clear Answers</b-button>
+                        </b-button-group>
                     </b-col>
                 </b-row>
             </b-card>
@@ -44,7 +45,7 @@
                             <b-radio-group stacked :name="'question_'+qindex" :options="question.Answers" v-model="question.UserAnswerLetter" value-field="Letter" text-field="FormattedText"></b-radio-group>
                         </b-col>
                     </b-row>
-                    <b-row v-if="showResults && question.UserAnswerLetter!=question.CorrectAnswerLetter">
+                    <b-row v-if="showResults && question.UserAnswerLetter!=question.CorrectAnswerLetter && question.UserAnswerLetter &&question.UserAnswerLetter!=''">
                         <b-col sm="6" lg="12">
                             Answer: {{question.CorrectAnswerLetter}}
                         </b-col>
@@ -162,7 +163,7 @@ export default {
 
           var _ = this._
 
-          var unused = this._.filter(allQuestions,function(q) { return _.indexOf(usedQuestions,q) == -1 })
+          var unused = this._.filter(allQuestions,function(q) { return _.indexOf(usedQuestions,q) == -1 && q.UserAnswerLetter==null })
 
           var randomIndex = Math.floor(Math.random() * unused.length);
 
@@ -185,6 +186,14 @@ export default {
       },
       gradeIt: function() {
           this.showResults = true
+      },
+      clear: function() {
+          var chapterNumber = this.selectedChapter
+          var chapter = this._.find(this.questionBank.Chapters,{Number:chapterNumber})
+          for(var i=0;i<chapter.Questions.length;i++){
+              chapter.Questions[i].UserAnswerLetter=null
+          }
+          this.generate()
       }
   },
   beforeMount () {

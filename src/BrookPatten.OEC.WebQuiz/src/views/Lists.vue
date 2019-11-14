@@ -16,6 +16,49 @@
             </b-card>
           </b-col>
       </b-row>
+      <b-row>
+          <b-col sm="6" lg="12">
+            <b-card>
+                <b-row>
+                    <b-col sm="6" lg="12">
+                        <h2>Normal Vital Signs</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>
+                                        Age
+                                    </td>
+                                    <td>
+                                        Pulse
+                                    </td>
+                                    <td>
+                                        Respirations
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Adult</td>
+                                    <td>60-100</td>
+                                    <td>12-20</td>
+                                </tr>
+                                <tr>
+                                    <td>Child (1-8 Years)</td>
+                                    <td>80-100</td>
+                                    <td>15-30</td>
+                                </tr>
+                                <tr>
+                                    <td>Infant (Birth-1 year)</td>
+                                    <td>100-120</td>
+                                    <td>25-50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </b-col>
+                </b-row>
+            </b-card>
+          </b-col>
+      </b-row>
   </div>
 </template>
 <script>

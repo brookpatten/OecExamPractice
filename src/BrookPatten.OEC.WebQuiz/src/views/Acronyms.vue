@@ -218,6 +218,48 @@ export default {
                   ]
               },
               {
+                  acronym:'LAP',
+                  pronounce:'',
+                  purpose:'Thorax Assessment',
+                  letters:[
+                      {
+                          letter:'L',
+                          text:'Look'
+                      },
+                      {
+                          letter:'A',
+                          text:'Auscultate'
+                      },
+                      {
+                          letter:'P',
+                          text:'Palpate'
+                      }
+                  ]
+              },
+              {
+                  acronym:'SLIC',
+                  pronounce:'',
+                  purpose:'Nasopharyngeal Airway Sizing',
+                  letters:[
+                      {
+                          letter:'S',
+                          text:'Size the adjunct'
+                      },
+                      {
+                          letter:'L',
+                          text:'Lubricate'
+                      },
+                      {
+                          letter:'I',
+                          text:'Insert'
+                      },
+                      {
+                          letter:'C',
+                          text:'Check'
+                      }
+                  ]
+              },
+              {
                   acronym:'PERRL',
                   pronounce:'Pearl',
                   purpose:'Pupil Assessment',
@@ -443,6 +485,37 @@ export default {
                       {
                           letter:'S',
                           text:'Sezure, Stroke, Syncope'
+                      }
+                  ]
+              },
+              {
+                  acronym:'SLUDGE',
+                  pronounce:'',
+                  purpose:'Organophosphate Poisoning',
+                  letters:[
+                      {
+                          letter:'S',
+                          text:'Salivation'
+                      },
+                      {
+                          letter:'L',
+                          text:'Lacrimation (Tearing)'
+                      },
+                      {
+                          letter:'U',
+                          text:'Urination'
+                      },
+                      {
+                          letter:'D',
+                          text:'Defecation'
+                      },
+                      {
+                          letter:'G',
+                          text:'GI Irritation (vomiting)'
+                      },
+                      {
+                          letter:'E',
+                          text:'Eye (pupil) constriction'
                       }
                   ]
               },

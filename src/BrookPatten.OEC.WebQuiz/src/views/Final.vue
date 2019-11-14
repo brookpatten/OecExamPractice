@@ -4,11 +4,12 @@
           <b-col sm="6" lg="12">
             <b-card>
                 <b-row>
-                    <b-col sm="1" lg="1">
+                    <b-col sm="6" lg="12">
+                        <b-button-group>
                         <b-button variant="success" v-on:click="generate()">Randomize</b-button> 
-                    </b-col>
-                    <b-col sm="1" lg="1">
-                        <b-button variant="warning" v-on:click="gradeIt()">Results</b-button>
+                        <b-button variant="warning" v-on:click="gradeIt()">Show Results</b-button>
+                        <b-button variant="danger" v-on:click="clear()">Clear Answers</b-button>
+                        </b-button-group> 
                     </b-col>
                 </b-row>
             </b-card>
@@ -57,7 +58,7 @@
                             <b-radio-group stacked :name="'question_'+qindex" :options="question.Answers" v-model="question.UserAnswerLetter" value-field="Letter" text-field="FormattedText"></b-radio-group>
                         </b-col>
                     </b-row>
-                    <b-row v-if="showResults && question.UserAnswerLetter!=question.CorrectAnswerLetter">
+                    <b-row v-if="showResults && question.UserAnswerLetter!=question.CorrectAnswerLetter && question.UserAnswerLetter &&question.UserAnswerLetter!=''">
                         <b-col sm="6" lg="12">
                             Answer: {{question.CorrectAnswerLetter}}
                         </b-col>
@@ -216,6 +217,15 @@ export default {
       },
       gradeIt: function() {
           this.showResults = true
+      },
+      clear: function() {
+          for(var c=0;c<this.questionBank.Chapters.length;c++){
+            var chapter = this.questionBank.Chapters[c]
+            for(var i=0;i<chapter.Questions.length;i++){
+                chapter.Questions[i].UserAnswerLetter=null
+            }
+          }
+          this.generate()
       }
   },
   beforeMount () {
