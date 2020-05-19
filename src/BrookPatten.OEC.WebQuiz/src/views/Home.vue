@@ -25,6 +25,7 @@
                 <ul>
                   <li><a href="https://www.youtube.com/user/EMTprepLLC/featured">EMT Prep</a></li>
                   <li><a href="https://www.youtube.com/channel/UCtZiATGABSljfqeEqlxB5vA/videos">Mad River Ski Patrol</a></li>
+                  <li><a href="https://www.youtube.com/user/oeconline">OEC Online</a></li>
                 </ul>
               </b-col>
               <b-col sm="6" lg="4">
